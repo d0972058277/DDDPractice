@@ -1,3 +1,4 @@
+using TrainTicketBookingSystem.Exceptions;
 using TrainTicketBookingSystem.MDD;
 
 namespace TrainTicketBookingSystem;
@@ -22,5 +23,17 @@ public class Ticket : Aggregate<Guid>
     public static Ticket Book(Guid id, Guid trainId, Location from, Location to, Date date)
     {
         return new Ticket(id, trainId, from, to, date, PaymentStatus.Unpaid);
+    }
+
+    public void Pay()
+    {
+        if (PaymentStatus == PaymentStatus.Unpaid)
+        {
+            PaymentStatus = PaymentStatus.Paid;
+        }
+        else
+        {
+            throw new DomainException("已經付過錢了");
+        }
     }
 }
