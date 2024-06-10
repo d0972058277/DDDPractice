@@ -16,7 +16,7 @@ public class Train : Aggregate<Guid>
     public IReadOnlyList<Location> Locations => _locations.AsReadOnly();
     public Date Date { get; private set; }
 
-    public static Train Create(Guid id, int seats, List<Location> locations, Date date)
+    public static Train Register(Guid id, int seats, List<Location> locations, Date date)
     {
         return new Train(id, seats, locations.ToList(), date);
     }
