@@ -5,9 +5,10 @@ namespace TrainTicketBookingSystem.Test;
 
 public class Startup
 {
-    // public static void ConfigureServices(IServiceCollection _)
-    // {
-    // }
+    public void ConfigureHost(IHostBuilder hostBuilder)
+    {
+        hostBuilder.UseEnvironment("Development");
+    }
 
     public IHostBuilder CreateHostBuilder() => MinimalApiHostBuilderFactory.GetHostBuilder<Program>();
 }
