@@ -25,8 +25,6 @@ public class TrainController : ControllerBase
         _trainTicketBoolingSystemDbContext = trainTicketBoolingSystemDbContext;
     }
 
-
-
     [HttpPost]
     public async Task<ActionResult<Guid>> Register([FromBody] RegisterTrainRequest request)
     {
