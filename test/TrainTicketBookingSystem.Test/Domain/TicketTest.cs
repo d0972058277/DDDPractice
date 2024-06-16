@@ -1,7 +1,7 @@
 using FluentAssertions;
 using TrainTicketBookingSystem.Exceptions;
 
-namespace TrainTicketBookingSystem.Test;
+namespace TrainTicketBookingSystem.Test.Domain;
 
 public class TicketTest
 {

@@ -1,6 +1,6 @@
 using FluentAssertions;
 
-namespace TrainTicketBookingSystem.Test;
+namespace TrainTicketBookingSystem.Test.Domain;
 
 public class LocationTest
 {
