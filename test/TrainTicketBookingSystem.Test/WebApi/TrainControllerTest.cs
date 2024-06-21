@@ -12,7 +12,8 @@ public class TrainControllerTest
     private readonly HttpClient _httpClient;
     private readonly TrainTicketBookingSystemDbContext _trainTicketBookingSystemDbContext;
 
-    public TrainControllerTest(HttpClient httpClient, TrainTicketBookingSystemDbContext trainTicketBookingSystemDbContext)
+    public TrainControllerTest(HttpClient httpClient,
+        TrainTicketBookingSystemDbContext trainTicketBookingSystemDbContext)
     {
         _httpClient = httpClient;
         _trainTicketBookingSystemDbContext = trainTicketBookingSystemDbContext;
@@ -24,7 +25,8 @@ public class TrainControllerTest
     public async Task TestName()
     {
         // Given
-        var registerTrainRequest = new RegisterTrainRequest { Seats = 10, Locations = ["taipei", "taichung"], Date = DateTime.UtcNow };
+        var registerTrainRequest = new RegisterTrainRequest
+            { Seats = 10, Locations = ["taipei", "taichung"], Date = DateTime.UtcNow };
         var jsonContent = JsonContent.Create(registerTrainRequest);
 
         // When
@@ -34,7 +36,8 @@ public class TrainControllerTest
         // Then
         var train = await _trainTicketBookingSystemDbContext.Trains.FindAsync(response!.Id);
         train!.Seats.Should().Be(registerTrainRequest.Seats);
-        train!.Locations.Should().BeEquivalentTo(registerTrainRequest.Locations.Select(location => Location.Create(location).Value));
+        train!.Locations.Should()
+            .BeEquivalentTo(registerTrainRequest.Locations.Select(location => Location.Create(location).Value));
         train!.Date.Should().Be(Date.Create(registerTrainRequest.Date).Value);
     }
 }
