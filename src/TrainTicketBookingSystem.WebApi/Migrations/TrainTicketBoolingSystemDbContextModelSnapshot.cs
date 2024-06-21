@@ -10,7 +10,7 @@ using TrainTicketBookingSystem.WebApi;
 
 namespace TrainTicketBookingSystem.WebApi.Migrations
 {
-    [DbContext(typeof(TrainTicketBoolingSystemDbContext))]
+    [DbContext(typeof(TrainTicketBookingSystemDbContext))]
     partial class TrainTicketBoolingSystemDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

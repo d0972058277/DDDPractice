@@ -2,9 +2,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TrainTicketBookingSystem.WebApi;
 
-public class TrainTicketBoolingSystemDbContext : DbContext
+public class TrainTicketBookingSystemDbContext : DbContext
 {
-    public TrainTicketBoolingSystemDbContext(DbContextOptions options) : base(options)
+    public TrainTicketBookingSystemDbContext(DbContextOptions options) : base(options)
     {
     }
 

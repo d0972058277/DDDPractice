@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<TrainTicketBoolingSystemDbContext>(opt =>
+builder.Services.AddDbContext<TrainTicketBookingSystemDbContext>(opt =>
 {
     var connectionString = "Server=localhost; Port=3306; User ID=root; Password=root; Database=TrainTicketBookingSystem;";
     opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));

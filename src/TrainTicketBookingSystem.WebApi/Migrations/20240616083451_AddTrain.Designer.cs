@@ -11,7 +11,7 @@ using TrainTicketBookingSystem.WebApi;
 
 namespace TrainTicketBookingSystem.WebApi.Migrations
 {
-    [DbContext(typeof(TrainTicketBoolingSystemDbContext))]
+    [DbContext(typeof(TrainTicketBookingSystemDbContext))]
     [Migration("20240616083451_AddTrain")]
     partial class AddTrain
     {

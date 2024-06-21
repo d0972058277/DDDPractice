@@ -7,13 +7,13 @@ namespace TrainTicketBookingSystem.Test.WebApi;
 
 public class TrainControllerTest
 {
-    public HttpClient _httpClient;
-    public TrainTicketBoolingSystemDbContext _trainTicketBoolingSystemDbContext;
+    private readonly HttpClient _httpClient;
+    private readonly TrainTicketBookingSystemDbContext _trainTicketBookingSystemDbContext;
 
-    public TrainControllerTest(HttpClient httpClient, TrainTicketBoolingSystemDbContext trainTicketBoolingSystemDbContext)
+    public TrainControllerTest(HttpClient httpClient, TrainTicketBookingSystemDbContext trainTicketBookingSystemDbContext)
     {
         _httpClient = httpClient;
-        _trainTicketBoolingSystemDbContext = trainTicketBoolingSystemDbContext;
+        _trainTicketBookingSystemDbContext = trainTicketBookingSystemDbContext;
     }
 
     [Fact]
@@ -28,7 +28,7 @@ public class TrainControllerTest
         var response = await httpResponse.Content.ReadFromJsonAsync<RegisterTrainResponse>();
 
         // Then
-        var train = await _trainTicketBoolingSystemDbContext.Trains.FindAsync(response!.Id);
+        var train = await _trainTicketBookingSystemDbContext.Trains.FindAsync(response!.Id);
         train!.Seats.Should().Be(registerTrainRequest.Seats);
         train!.Locations.Should().BeEquivalentTo(registerTrainRequest.Locations.Select(location => Location.Create(location).Value));
         train!.Date.Should().Be(Date.Create(registerTrainRequest.Date).Value);
