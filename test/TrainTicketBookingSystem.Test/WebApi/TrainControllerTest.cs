@@ -1,10 +1,12 @@
 using System.Net.Http.Json;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 using TrainTicketBookingSystem.WebApi;
 using TrainTicketBookingSystem.WebApi.Controllers;
 
 namespace TrainTicketBookingSystem.Test.WebApi;
 
+[Collection("Sequential")]
 public class TrainControllerTest
 {
     private readonly HttpClient _httpClient;
@@ -14,6 +16,8 @@ public class TrainControllerTest
     {
         _httpClient = httpClient;
         _trainTicketBookingSystemDbContext = trainTicketBookingSystemDbContext;
+        _trainTicketBookingSystemDbContext.Database.EnsureDeleted();
+        _trainTicketBookingSystemDbContext.Database.Migrate();
     }
 
     [Fact]
