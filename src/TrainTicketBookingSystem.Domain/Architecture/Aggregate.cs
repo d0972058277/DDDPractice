@@ -12,10 +12,10 @@ public class Aggregate<TId> : Entity<TId> where TId : IComparable<TId>
     {
     }
 
-    private readonly List<IDomainEvent> _domainEvents = new();
-    public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+    private readonly List<DomainEvent> _domainEvents = new();
+    public IReadOnlyList<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-    protected void AddDomainEvent(IDomainEvent domainEvent)
+    protected void AddDomainEvent(DomainEvent domainEvent)
     {
         _domainEvents.Add(domainEvent);
     }
