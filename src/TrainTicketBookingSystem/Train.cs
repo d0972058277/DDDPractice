@@ -1,4 +1,4 @@
-using TrainTicketBookingSystem.MDD;
+using TrainTicketBookingSystem.Architecture;
 
 namespace TrainTicketBookingSystem;
 

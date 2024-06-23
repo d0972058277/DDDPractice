@@ -1,5 +1,5 @@
+using TrainTicketBookingSystem.Architecture;
 using TrainTicketBookingSystem.Exceptions;
-using TrainTicketBookingSystem.MDD;
 
 namespace TrainTicketBookingSystem;
 

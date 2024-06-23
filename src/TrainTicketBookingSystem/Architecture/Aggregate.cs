@@ -1,6 +1,6 @@
 using CSharpFunctionalExtensions;
 
-namespace TrainTicketBookingSystem.MDD;
+namespace TrainTicketBookingSystem.Architecture;
 
 public class Aggregate<TId> : Entity<TId> where TId : IComparable<TId>
 {
