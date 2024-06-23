@@ -2,21 +2,20 @@ namespace TrainTicketBookingSystem.WebApi.Application.RegisterTrain;
 
 public class RegisterTrainCommandHandler
 {
-    private readonly TrainTicketBookingSystemDbContext _trainTicketBookingSystemDbContext;
+    private readonly ITrainRepository _trainRepository;
 
-    public RegisterTrainCommandHandler(TrainTicketBookingSystemDbContext trainTicketBookingSystemDbContext)
+    public RegisterTrainCommandHandler(ITrainRepository trainRepository)
     {
-        _trainTicketBookingSystemDbContext = trainTicketBookingSystemDbContext;
+        _trainRepository = trainRepository;
     }
 
-    public async Task<Guid> Handle(RegisterTrainCommand registerTrainCommand)
+    public async Task<Guid> HandleAsync(RegisterTrainCommand registerTrainCommand)
     {
         var id = Guid.NewGuid();
         var train = Train.Register(id, registerTrainCommand.Seats,
             registerTrainCommand.Locations.Select(x => Location.Create(x).Value),
             Date.Create(registerTrainCommand.DateTime).Value);
-        _trainTicketBookingSystemDbContext.Add(train);
-        await _trainTicketBookingSystemDbContext.SaveChangesAsync();
+        await _trainRepository.AddAsync(train);
         return id;
     }
 }

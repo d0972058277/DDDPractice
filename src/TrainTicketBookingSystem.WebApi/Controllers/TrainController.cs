@@ -9,16 +9,16 @@ public class TrainController : ControllerBase
 {
     private readonly RegisterTrainCommandHandler _registerTrainCommandHandler;
 
-    public TrainController(TrainTicketBookingSystemDbContext trainTicketBookingSystemDbContext)
+    public TrainController(RegisterTrainCommandHandler registerTrainCommandHandler)
     {
-        _registerTrainCommandHandler = new RegisterTrainCommandHandler(trainTicketBookingSystemDbContext);
+        _registerTrainCommandHandler = registerTrainCommandHandler;
     }
 
     [HttpPost]
     public async Task<ActionResult<Guid>> Register([FromBody] RegisterTrainRequest request)
     {
         var command = new RegisterTrainCommand(request.Seats, request.Locations, request.Date);
-        var id = await _registerTrainCommandHandler.Handle(command);
+        var id = await _registerTrainCommandHandler.HandleAsync(command);
         return Ok(new RegisterTrainResponse { Id = id });
     }
 }
