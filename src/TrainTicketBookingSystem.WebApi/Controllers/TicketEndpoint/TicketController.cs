@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.JavaScript;
 using Microsoft.AspNetCore.Mvc;
 using TrainTicketBookingSystem.Domain.Models;
 

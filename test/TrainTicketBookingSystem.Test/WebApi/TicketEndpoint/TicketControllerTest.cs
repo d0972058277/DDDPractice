@@ -1,11 +1,9 @@
 using System.Net.Http.Json;
-using System.Runtime.InteropServices.JavaScript;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using TrainTicketBookingSystem.Domain.Models;
 using TrainTicketBookingSystem.WebApi;
 using TrainTicketBookingSystem.WebApi.Controllers.TicketEndpoint;
-using TrainTicketBookingSystem.WebApi.Controllers.TrainEndpoint;
 
 namespace TrainTicketBookingSystem.Test.WebApi.TicketEndpoint;
 

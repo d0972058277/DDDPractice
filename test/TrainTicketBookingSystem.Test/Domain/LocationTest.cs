@@ -1,5 +1,4 @@
 using FluentAssertions;
-using TrainTicketBookingSystem.Domain;
 using TrainTicketBookingSystem.Domain.Architecture;
 using TrainTicketBookingSystem.Domain.Models;
 

@@ -1,5 +1,3 @@
-using TrainTicketBookingSystem.Domain.Models;
-
 namespace TrainTicketBookingSystem.WebApi.Controllers.TicketEndpoint;
 
 public class BookTicketRequest
