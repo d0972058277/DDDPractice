@@ -30,8 +30,4 @@
     <ProjectReference Include="..\..\src\TrainTicketBookingSystem.Domain\TrainTicketBookingSystem.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Domain\" />
-  </ItemGroup>
-
 </Project>
