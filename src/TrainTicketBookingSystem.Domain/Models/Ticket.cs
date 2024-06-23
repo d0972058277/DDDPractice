@@ -5,6 +5,10 @@ namespace TrainTicketBookingSystem.Domain.Models;
 
 public class Ticket : Aggregate<Guid>
 {
+    private Ticket()
+    {
+    }
+
     private Ticket(Guid id, Guid trainId, Location from, Location to, Date date, PaymentStatus paymentStatus) : base(id)
     {
         TrainId = trainId;
