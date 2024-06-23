@@ -398,5 +398,5 @@ FodyWeavers.xsd
 *.sln.iml
 
 .vscode/
-
+.DB_Store
 .idea/

@@ -1,4 +1,4 @@
-namespace TrainTicketBookingSystem.Exceptions;
+namespace TrainTicketBookingSystem.Domain.Architecture;
 
 public class DomainException : Exception
 {

@@ -5,13 +5,13 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{15D109D4-4C35-4B58-8C44-9BBF78ADA23A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTicketBookingSystem", "src\TrainTicketBookingSystem\TrainTicketBookingSystem.csproj", "{D2D5663E-B6F8-4335-90AE-78723FED3348}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{3146D790-D59D-4525-9ED7-C00DDEE76391}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTicketBookingSystem.Test", "test\TrainTicketBookingSystem.Test\TrainTicketBookingSystem.Test.csproj", "{7543017A-7AFD-4ACC-B1FC-4F177314D762}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTicketBookingSystem.WebApi", "src\TrainTicketBookingSystem.WebApi\TrainTicketBookingSystem.WebApi.csproj", "{23C1F495-6F96-4D3D-BB6B-6DE89A4028EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTicketBookingSystem.Domain", "src\TrainTicketBookingSystem.Domain\TrainTicketBookingSystem.Domain.csproj", "{8C0ADF75-DBD4-4D88-A96C-9B81396363B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,10 +22,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D2D5663E-B6F8-4335-90AE-78723FED3348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D2D5663E-B6F8-4335-90AE-78723FED3348}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D2D5663E-B6F8-4335-90AE-78723FED3348}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D2D5663E-B6F8-4335-90AE-78723FED3348}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7543017A-7AFD-4ACC-B1FC-4F177314D762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7543017A-7AFD-4ACC-B1FC-4F177314D762}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7543017A-7AFD-4ACC-B1FC-4F177314D762}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -34,10 +30,14 @@ Global
 		{23C1F495-6F96-4D3D-BB6B-6DE89A4028EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23C1F495-6F96-4D3D-BB6B-6DE89A4028EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23C1F495-6F96-4D3D-BB6B-6DE89A4028EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C0ADF75-DBD4-4D88-A96C-9B81396363B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C0ADF75-DBD4-4D88-A96C-9B81396363B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C0ADF75-DBD4-4D88-A96C-9B81396363B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C0ADF75-DBD4-4D88-A96C-9B81396363B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D2D5663E-B6F8-4335-90AE-78723FED3348} = {15D109D4-4C35-4B58-8C44-9BBF78ADA23A}
 		{7543017A-7AFD-4ACC-B1FC-4F177314D762} = {3146D790-D59D-4525-9ED7-C00DDEE76391}
 		{23C1F495-6F96-4D3D-BB6B-6DE89A4028EE} = {15D109D4-4C35-4B58-8C44-9BBF78ADA23A}
+		{8C0ADF75-DBD4-4D88-A96C-9B81396363B7} = {15D109D4-4C35-4B58-8C44-9BBF78ADA23A}
 	EndGlobalSection
 EndGlobal

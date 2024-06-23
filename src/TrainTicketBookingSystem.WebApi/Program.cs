@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using TrainTicketBookingSystem;
 
 var builder = WebApplication.CreateBuilder(args);
 
