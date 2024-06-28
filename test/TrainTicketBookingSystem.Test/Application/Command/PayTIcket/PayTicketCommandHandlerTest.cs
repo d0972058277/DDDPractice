@@ -15,12 +15,12 @@ public class PayTicketCommandHandlerTest
     public async Task Handle()
     {
         // Given
-        var ticketRepository = new Mock<ITicketRepository>();
-        var mediator = new Mock<IMediator>();
-
         var ticket = Ticket.Book(Guid.NewGuid(), Guid.NewGuid(), Location.Create("taipei"), Location.Create("taichung"),
             Date.Create(DateTime.UtcNow));
+        var ticketRepository = new Mock<ITicketRepository>();
         ticketRepository.Setup(r => r.FindAsync(ticket.Id, default)).ReturnsAsync(ticket);
+
+        var mediator = new Mock<IMediator>();
 
         var command = new PayTicketCommand(ticket.Id);
         var handler = new PayTicketCommandHandler(ticketRepository.Object, mediator.Object);
