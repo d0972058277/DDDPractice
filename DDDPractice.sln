@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTicketBookingSystem.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTicketBookingSystem.Domain", "src\TrainTicketBookingSystem.Domain\TrainTicketBookingSystem.Domain.csproj", "{8C0ADF75-DBD4-4D88-A96C-9B81396363B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTicketBookingSystem.Application", "src\TrainTicketBookingSystem.Application\TrainTicketBookingSystem.Application.csproj", "{6E098DAA-4471-4353-BF26-A6569156110A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,10 +36,15 @@ Global
 		{8C0ADF75-DBD4-4D88-A96C-9B81396363B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C0ADF75-DBD4-4D88-A96C-9B81396363B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C0ADF75-DBD4-4D88-A96C-9B81396363B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E098DAA-4471-4353-BF26-A6569156110A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E098DAA-4471-4353-BF26-A6569156110A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E098DAA-4471-4353-BF26-A6569156110A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E098DAA-4471-4353-BF26-A6569156110A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7543017A-7AFD-4ACC-B1FC-4F177314D762} = {3146D790-D59D-4525-9ED7-C00DDEE76391}
 		{23C1F495-6F96-4D3D-BB6B-6DE89A4028EE} = {15D109D4-4C35-4B58-8C44-9BBF78ADA23A}
 		{8C0ADF75-DBD4-4D88-A96C-9B81396363B7} = {15D109D4-4C35-4B58-8C44-9BBF78ADA23A}
+		{6E098DAA-4471-4353-BF26-A6569156110A} = {15D109D4-4C35-4B58-8C44-9BBF78ADA23A}
 	EndGlobalSection
 EndGlobal
