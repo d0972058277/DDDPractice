@@ -16,9 +16,10 @@ public class RegisterTrainCommandHandler : ICommandHandler<RegisterTrainCommand,
 
     public async Task<Guid> Handle(RegisterTrainCommand command, CancellationToken cancellationToken)
     {
-        var train = Train.Register(Guid.NewGuid(), command.Seats, command.Locations, command.Date);
+        var tranId = Guid.NewGuid();
+        var train = Train.Register(tranId, command.Seats, command.Locations, command.Date);
         await _trainRepository.AddAsync(train, cancellationToken);
-        await _mediator.PublishAndClearDomainEvents(train, cancellationToken: cancellationToken);
-        return train.Id;
+        await _mediator.PublishAndClearDomainEvents(train, cancellationToken);
+        return tranId;
     }
 }
