@@ -1,12 +1,12 @@
 using Moq;
+using TrainTicketBookingSystem.Application;
 using TrainTicketBookingSystem.Application.Architecture;
-using TrainTicketBookingSystem.Application.Command;
 using TrainTicketBookingSystem.Application.Command.RegisterTrain;
 using TrainTicketBookingSystem.Domain.Architecture;
 using TrainTicketBookingSystem.Domain.Events;
 using TrainTicketBookingSystem.Domain.Models;
 
-namespace TrainTicketBookingSystem.Test.Application.RegisterTrain;
+namespace TrainTicketBookingSystem.Test.Application.Command.RegisterTrain;
 
 public class RegisterTrainCommandHandlerTest
 {
