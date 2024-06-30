@@ -1,4 +1,8 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using TrainTicketBookingSystem.Application;
+using TrainTicketBookingSystem.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +11,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(Assembly.Load("TrainTicketBookingSystem.Application"));
+});
+builder.Services.TryAddScoped<ITrainRepository, TrainRepository>();
+builder.Services.TryAddScoped<ITicketRepository, TicketRepository>();
+
+builder.Services.AddDbContext<TrainTicketBookingSystemDbContext>(opt =>
+{
+    const string connectionString =
+        "Server=localhost; Port=3306; User ID=root; Password=root; Database=TrainTicketBookingSystem;";
+    opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
 
 var app = builder.Build();
 
