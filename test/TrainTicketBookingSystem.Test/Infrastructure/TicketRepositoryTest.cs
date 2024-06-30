@@ -29,13 +29,7 @@ public class TicketRepositoryTest
         var actual = await _ticketRepository.FindAsync(ticket.Id, default);
 
         // Then
-        actual.Should().NotBeNull();
-        actual!.Id.Should().Be(ticket.Id);
-        actual.TrainId.Should().Be(ticket.TrainId);
-        actual.From.Should().Be(ticket.From);
-        actual.To.Should().Be(ticket.To);
-        actual.PaymentStatus.Should().Be(ticket.PaymentStatus);
-        actual.Date.Should().Be(ticket.Date);
+        ActualShouldBeExpect(actual, ticket);
     }
 
     [Fact]
@@ -50,13 +44,7 @@ public class TicketRepositoryTest
 
         // Then
         var actual = await _dbContext.Tickets.FindAsync(ticket.Id);
-        actual.Should().NotBeNull();
-        actual!.Id.Should().Be(ticket.Id);
-        actual.TrainId.Should().Be(ticket.TrainId);
-        actual.From.Should().Be(ticket.From);
-        actual.To.Should().Be(ticket.To);
-        actual.PaymentStatus.Should().Be(ticket.PaymentStatus);
-        actual.Date.Should().Be(ticket.Date);
+        ActualShouldBeExpect(actual, ticket);
     }
 
     [Fact]
@@ -74,13 +62,7 @@ public class TicketRepositoryTest
 
         // Then
         var actual = await _dbContext.Tickets.FindAsync(ticket.Id);
-        actual.Should().NotBeNull();
-        actual!.Id.Should().Be(ticket.Id);
-        actual.TrainId.Should().Be(ticket.TrainId);
-        actual.From.Should().Be(ticket.From);
-        actual.To.Should().Be(ticket.To);
-        actual.PaymentStatus.Should().Be(ticket.PaymentStatus);
-        actual.Date.Should().Be(ticket.Date);
+        ActualShouldBeExpect(actual, ticket);
     }
 
     private async Task AddTicketAsync(Ticket original)
@@ -99,5 +81,16 @@ public class TicketRepositoryTest
     {
         return Ticket.Book(Guid.NewGuid(), Guid.NewGuid(), Location.Create("taipei"), Location.Create("taichung"),
             Date.Create(DateTime.UtcNow));
+    }
+
+    private static void ActualShouldBeExpect(Ticket? actual, Ticket expect)
+    {
+        actual.Should().NotBeNull();
+        actual!.Id.Should().Be(expect.Id);
+        actual.TrainId.Should().Be(expect.TrainId);
+        actual.From.Should().Be(expect.From);
+        actual.To.Should().Be(expect.To);
+        actual.PaymentStatus.Should().Be(expect.PaymentStatus);
+        actual.Date.Should().Be(expect.Date);
     }
 }

@@ -30,11 +30,7 @@ public class TrainRepositoryTest
         var actual = await _trainRepository.FindAsync(train.Id, default);
 
         // Then
-        actual.Should().NotBeNull();
-        actual.Id.Should().Be(train.Id);
-        actual.Seats.Should().Be(train.Seats);
-        actual.Locations.Should().BeEquivalentTo(train.Locations);
-        actual.Date.Should().Be(train.Date);
+        ActualShouldBeExpect(actual, train);
     }
 
     [Fact]
@@ -49,11 +45,7 @@ public class TrainRepositoryTest
 
         // Then
         var actual = await _dbContext.Trains.FindAsync(train.Id);
-        actual.Should().NotBeNull();
-        actual!.Id.Should().Be(train.Id);
-        actual.Seats.Should().Be(train.Seats);
-        actual.Locations.Should().BeEquivalentTo(train.Locations);
-        actual.Date.Should().Be(train.Date);
+        ActualShouldBeExpect(actual, train);
     }
 
     [Fact]
@@ -71,11 +63,7 @@ public class TrainRepositoryTest
 
         // Then
         var actual = await _dbContext.Trains.FindAsync(train.Id);
-        actual.Should().NotBeNull();
-        actual!.Id.Should().Be(train.Id);
-        actual.Seats.Should().Be(train.Seats);
-        actual.Locations.Should().BeEquivalentTo(train.Locations);
-        actual.Date.Should().Be(train.Date);
+        ActualShouldBeExpect(actual, train);
     }
 
     private async Task<Train> FindTrainAsync(Guid trainId)
@@ -96,5 +84,14 @@ public class TrainRepositoryTest
             new List<Location> { Location.Create("taipei"), Location.Create("taichung") },
             Date.Create(DateTime.UtcNow));
         return train;
+    }
+
+    private static void ActualShouldBeExpect(Train? actual, Train expect)
+    {
+        actual.Should().NotBeNull();
+        actual!.Id.Should().Be(expect.Id);
+        actual.Seats.Should().Be(expect.Seats);
+        actual.Locations.Should().BeEquivalentTo(expect.Locations);
+        actual.Date.Should().Be(expect.Date);
     }
 }
