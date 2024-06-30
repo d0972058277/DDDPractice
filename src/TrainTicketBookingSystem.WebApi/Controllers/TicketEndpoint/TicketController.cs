@@ -26,7 +26,7 @@ public class TicketController : ControllerBase
         return Ok(new BookTicketResponse { Id = ticket.Id });
     }
 
-    [HttpPost("{id:guid}/pay")]
+    [HttpPost("{id:guid}/Pay")]
     public async Task<ActionResult> Pay([FromRoute] Guid id)
     {
         var ticket = await _trainTicketBookingSystemDbContext.Tickets.FindAsync(id);
