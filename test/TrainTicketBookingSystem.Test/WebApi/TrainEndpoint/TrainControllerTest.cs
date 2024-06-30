@@ -23,7 +23,7 @@ public class TrainControllerTest
     }
 
     [Fact]
-    public async Task TestName()
+    public async Task 應該成功登記一班火車()
     {
         // Given
         var request = new RegisterTrainRequest

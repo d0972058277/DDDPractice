@@ -25,4 +25,14 @@ public class TicketController : ControllerBase
         await _trainTicketBookingSystemDbContext.SaveChangesAsync();
         return Ok(new BookTicketResponse { Id = ticket.Id });
     }
+
+    [HttpPost("{id:guid}/pay")]
+    public async Task<ActionResult> Pay([FromRoute] Guid id)
+    {
+        var ticket = await _trainTicketBookingSystemDbContext.Tickets.FindAsync(id);
+        ticket!.Pay();
+        _trainTicketBookingSystemDbContext.Tickets.Update(ticket);
+        await _trainTicketBookingSystemDbContext.SaveChangesAsync();
+        return Ok();
+    }
 }

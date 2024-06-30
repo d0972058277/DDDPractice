@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrainTicketBookingSystem.Domain.Models;
 
 namespace TrainTicketBookingSystem.WebApi;
@@ -47,7 +48,7 @@ public class TrainTicketBookingSystemDbContext : DbContext
             ticket.OwnsOne(e => e.From, location => { location.Property(e => e.Name).HasColumnName("From"); });
             ticket.OwnsOne(e => e.To, location => { location.Property(e => e.Name).HasColumnName("To"); });
             ticket.OwnsOne(e => e.Date, date => { date.Property(e => e.Value).HasColumnName("Date"); });
-            ticket.Property(e => e.PaymentStatus);
+            ticket.Property(e => e.PaymentStatus).HasConversion(new EnumToStringConverter<PaymentStatus>());
         });
     }
 }

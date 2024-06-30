@@ -12,7 +12,7 @@ using TrainTicketBookingSystem.WebApi;
 namespace TrainTicketBookingSystem.WebApi.Migrations
 {
     [DbContext(typeof(TrainTicketBookingSystemDbContext))]
-    [Migration("20240623095646_Init")]
+    [Migration("20240630061713_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -31,8 +31,9 @@ namespace TrainTicketBookingSystem.WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<int>("PaymentStatus")
-                        .HasColumnType("int");
+                    b.Property<string>("PaymentStatus")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<Guid>("TrainId")
                         .HasColumnType("char(36)");

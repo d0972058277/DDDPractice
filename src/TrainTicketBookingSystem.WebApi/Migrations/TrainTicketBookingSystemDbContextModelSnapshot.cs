@@ -28,8 +28,9 @@ namespace TrainTicketBookingSystem.WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<int>("PaymentStatus")
-                        .HasColumnType("int");
+                    b.Property<string>("PaymentStatus")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<Guid>("TrainId")
                         .HasColumnType("char(36)");
