@@ -1,4 +1,6 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using TrainTicketBookingSystem.Application;
@@ -14,6 +16,11 @@ public class Startup
         hostBuilder.UseEnvironment("Development");
         hostBuilder.ConfigureServices(serivce =>
         {
+            serivce.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssembly(Assembly.Load("TrainTicketBookingSystem.Test"));
+            });
+
             serivce.TryAddScoped<ITrainRepository, TrainRepository>();
             serivce.TryAddScoped<ITicketRepository, TicketRepository>();
 
