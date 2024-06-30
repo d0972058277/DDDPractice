@@ -1,8 +1,10 @@
 using System.Reflection;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using TrainTicketBookingSystem.Application;
 using TrainTicketBookingSystem.Infrastructure;
+using Mediator = TrainTicketBookingSystem.Infrastructure.Architecture.Mediator;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,7 @@ builder.Services.AddMediatR(cfg =>
 {
     cfg.RegisterServicesFromAssembly(Assembly.Load("TrainTicketBookingSystem.Application"));
 });
+builder.Services.TryAddScoped<TrainTicketBookingSystem.Application.Architecture.IMediator, Mediator>();
 builder.Services.TryAddScoped<ITrainRepository, TrainRepository>();
 builder.Services.TryAddScoped<ITicketRepository, TicketRepository>();
 
