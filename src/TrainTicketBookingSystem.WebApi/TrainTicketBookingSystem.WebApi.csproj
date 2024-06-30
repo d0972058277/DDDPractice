@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TrainTicketBookingSystem.Domain\TrainTicketBookingSystem.Domain.csproj" />
+    <ProjectReference Include="..\TrainTicketBookingSystem.Infrastructure\TrainTicketBookingSystem.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

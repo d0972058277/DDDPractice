@@ -5,6 +5,10 @@ namespace TrainTicketBookingSystem.Domain.Models;
 
 public class Train : Aggregate<Guid>
 {
+    private Train()
+    {
+    }
+
     protected Train(Guid id, int seats, List<Location> locations, Date date) : base(id)
     {
         Seats = seats;
