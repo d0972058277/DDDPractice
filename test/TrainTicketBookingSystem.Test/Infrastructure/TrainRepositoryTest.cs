@@ -30,6 +30,7 @@ public class TrainRepositoryTest
         var actual = await _trainRepository.FindAsync(train.Id, default);
 
         // Then
+        actual.Should().NotBeNull();
         actual.Id.Should().Be(train.Id);
         actual.Seats.Should().Be(train.Seats);
         actual.Locations.Should().BeEquivalentTo(train.Locations);

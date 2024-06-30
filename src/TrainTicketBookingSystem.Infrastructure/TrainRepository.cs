@@ -14,8 +14,7 @@ public class TrainRepository : ITrainRepository
 
     public async Task<Train> FindAsync(Guid trainId, CancellationToken cancellationToken)
     {
-        var train = await _dbContext.Trains.FindAsync(new object?[] { trainId }, cancellationToken);
-        return train!;
+        return (await _dbContext.Trains.FindAsync(new object?[] { trainId }, cancellationToken))!;
     }
 
     public async Task AddAsync(Train train, CancellationToken cancellationToken)

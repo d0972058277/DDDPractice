@@ -15,6 +15,7 @@ public class Startup
         hostBuilder.ConfigureServices(serivce =>
         {
             serivce.TryAddScoped<ITrainRepository, TrainRepository>();
+            serivce.TryAddScoped<ITicketRepository, TicketRepository>();
 
             serivce.TryAddScoped<TrainTicketBookingSystemDbContext>(provider =>
             {
