@@ -25,6 +25,13 @@ public class Startup
                 builder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
                 return new TrainTicketBookingSystemDbContext(builder.Options);
             });
+
+            // serivce.TryAddScoped<TrainTicketBookingSystemDbContext>(provider =>
+            // {
+            //     var builder = new DbContextOptionsBuilder<TrainTicketBookingSystemDbContext>();
+            //     builder.UseMongoDB("mongodb://localhost:27017", "TrainTicketBookingSystem");
+            //     return new TrainTicketBookingSystemDbContext(builder.Options);
+            // });
         });
     }
 

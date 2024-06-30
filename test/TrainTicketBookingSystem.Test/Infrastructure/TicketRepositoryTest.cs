@@ -1,10 +1,12 @@
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 using TrainTicketBookingSystem.Application;
 using TrainTicketBookingSystem.Domain.Models;
 using TrainTicketBookingSystem.Infrastructure;
 
 namespace TrainTicketBookingSystem.Test.Infrastructure;
 
+[Collection("Sequential")]
 public class TicketRepositoryTest
 {
     private readonly ITicketRepository _ticketRepository;
@@ -14,6 +16,8 @@ public class TicketRepositoryTest
     {
         _ticketRepository = ticketRepository;
         _dbContext = dbContext;
+        _dbContext.Database.EnsureDeleted();
+        _dbContext.Database.Migrate();
     }
 
     [Fact]

@@ -5,12 +5,16 @@ namespace TrainTicketBookingSystem.Domain.Models;
 
 public class Location : ValueObject
 {
+    private Location()
+    {
+    }
+
     private Location(string name)
     {
         Name = name;
     }
 
-    public string Name { get; }
+    public string Name { get; private set; }
 
     public static Location Create(string name)
     {
