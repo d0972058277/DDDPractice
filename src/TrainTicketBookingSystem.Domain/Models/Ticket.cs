@@ -8,7 +8,8 @@ public class Ticket : Aggregate<Guid>
 {
     private Ticket()
     {
-        RegisterDomainEventHandlers();
+        RegisterDomainEventHandler<TicketBookedDomainEvent>(new TicketBookedDomainEventHandler());
+        RegisterDomainEventHandler<TicketPaidDomainEvent>(new TicketPaidDomainEventHandler());
     }
 
     internal void SetId(Guid id) => Id = id;
@@ -28,11 +29,5 @@ public class Ticket : Aggregate<Guid>
     public void Pay()
     {
         Apply(new TicketPaidDomainEvent(Id));
-    }
-
-    private void RegisterDomainEventHandlers()
-    {
-        RegisterDomainEventHandler<TicketBookedDomainEvent>(new TicketBookedDomainEventHandler());
-        RegisterDomainEventHandler<TicketPaidDomainEvent>(new TicketPaidDomainEventHandler());
     }
 }

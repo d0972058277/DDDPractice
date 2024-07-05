@@ -9,7 +9,7 @@ public class Train : Aggregate<Guid>
     private Train()
     {
         _locations = new List<Location>();
-        RegisterDomainEventHandlers();
+        RegisterDomainEventHandler<TrainRegisteredDomainEvent>(new TrainRegisteredDomainEventHandler());
     }
 
     internal void SetId(Guid id) => Id = id;
@@ -31,10 +31,5 @@ public class Train : Aggregate<Guid>
         if (Seats == 0) throw new DomainException("票已售完");
 
         Seats--;
-    }
-
-    private void RegisterDomainEventHandlers()
-    {
-        RegisterDomainEventHandler<TrainRegisteredDomainEvent>(new TrainRegisteredDomainEventHandler());
     }
 }
