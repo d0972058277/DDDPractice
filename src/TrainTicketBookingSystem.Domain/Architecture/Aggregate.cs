@@ -2,7 +2,7 @@ using CSharpFunctionalExtensions;
 
 namespace TrainTicketBookingSystem.Domain.Architecture;
 
-public abstract class Aggregate<TId> : Entity<TId> where TId : IComparable<TId>
+public abstract class Aggregate<TId> : Entity<TId>, IAggregateRoot where TId : IComparable<TId>
 {
     protected Aggregate() : base()
     {

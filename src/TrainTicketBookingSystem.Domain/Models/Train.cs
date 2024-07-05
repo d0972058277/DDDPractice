@@ -5,15 +5,23 @@ namespace TrainTicketBookingSystem.Domain.Models;
 
 public class Train : Aggregate<Guid>
 {
+    private static readonly Dictionary<Type, IDomainEventHandler> EventHandlers = new()
+    {
+        { typeof(TrainRegisteredDomainEvent), new TrainRegisteredDomainEventHandler() },
+    };
+
     private Train()
     {
         _locations = new List<Location>();
     }
 
-    public int Seats { get; private set; }
+
+    internal void SetId(Guid id) => Id = id;
+    public int Seats { get; internal set; }
+    internal void SetLocations(IEnumerable<Location> locations) => _locations = locations.ToList();
     private List<Location> _locations;
     public IReadOnlyList<Location> Locations => _locations.AsReadOnly();
-    public Date Date { get; private set; }
+    public Date Date { get; internal set; }
 
     public static Train Register(Guid id, int seats, IEnumerable<Location> locations, Date date)
     {
@@ -31,14 +39,9 @@ public class Train : Aggregate<Guid>
 
     protected override void When(DomainEvent domainEvent)
     {
-        switch (domainEvent)
+        if (EventHandlers.TryGetValue(domainEvent.GetType(), out var handler))
         {
-            case TrainRegisteredDomainEvent e:
-                Id = e.TrainId;
-                Seats = e.Seats;
-                _locations = e.Locations.ToList();
-                Date = e.Date;
-                break;
+            handler.Handle(this, domainEvent);
         }
     }
 }
