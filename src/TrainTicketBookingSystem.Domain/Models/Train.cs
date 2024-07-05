@@ -5,11 +5,8 @@ namespace TrainTicketBookingSystem.Domain.Models;
 
 public class Train : Aggregate<Guid>
 {
-    protected Train(Guid id, int seats, List<Location> locations, Date date) : base(id)
+    private Train()
     {
-        Seats = seats;
-        _locations = locations;
-        Date = date;
     }
 
     public int Seats { get; private set; }
@@ -19,8 +16,8 @@ public class Train : Aggregate<Guid>
 
     public static Train Register(Guid id, int seats, IEnumerable<Location> locations, Date date)
     {
-        var train = new Train(id, seats, locations.ToList(), date);
-        train.AddDomainEvent(new TrainRegisteredDomainEvent(train.Id, train.Seats, train.Locations, train.Date));
+        var train = new Train();
+        train.Apply(new TrainRegisteredDomainEvent(id, seats, locations.ToList(), date));
         return train;
     }
 
@@ -29,5 +26,18 @@ public class Train : Aggregate<Guid>
         if (Seats == 0) throw new DomainException("票已售完");
 
         Seats--;
+    }
+
+    protected override void When(DomainEvent domainEvent)
+    {
+        switch (domainEvent)
+        {
+            case TrainRegisteredDomainEvent e:
+                Id = e.TrainId;
+                Seats = e.Seats;
+                _locations = e.Locations.ToList();
+                Date = e.Date;
+                break;
+        }
     }
 }

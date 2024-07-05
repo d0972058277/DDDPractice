@@ -5,13 +5,8 @@ namespace TrainTicketBookingSystem.Domain.Models;
 
 public class Ticket : Aggregate<Guid>
 {
-    private Ticket(Guid id, Guid trainId, Location from, Location to, Date date, PaymentStatus paymentStatus) : base(id)
+    private Ticket()
     {
-        TrainId = trainId;
-        From = from;
-        To = to;
-        Date = date;
-        PaymentStatus = paymentStatus;
     }
 
     public Guid TrainId { get; private set; }
@@ -22,22 +17,38 @@ public class Ticket : Aggregate<Guid>
 
     public static Ticket Book(Guid id, Guid trainId, Location from, Location to, Date date)
     {
-        var ticket = new Ticket(id, trainId, from, to, date, PaymentStatus.Unpaid);
-        ticket.AddDomainEvent(new TicketBookedDomainEvent(ticket.Id, ticket.TrainId, ticket.From, ticket.To,
-            ticket.Date));
+        var ticket = new Ticket();
+        ticket.Apply(new TicketBookedDomainEvent(id, trainId, from, to, date));
         return ticket;
     }
 
     public void Pay()
     {
-        if (PaymentStatus == PaymentStatus.Unpaid)
+        Apply(new TicketPaidDomainEvent(Id));
+    }
+
+    protected override void When(DomainEvent domainEvent)
+    {
+        switch (domainEvent)
         {
-            PaymentStatus = PaymentStatus.Paid;
-            AddDomainEvent(new TicketPaidDomainEvent(Id));
-        }
-        else
-        {
-            throw new DomainException("已經付過錢了");
+            case TicketBookedDomainEvent e:
+                Id = e.TicketId;
+                TrainId = e.TrainId;
+                From = e.From;
+                To = e.To;
+                Date = e.Date;
+                break;
+            case TicketPaidDomainEvent e:
+                if (PaymentStatus == PaymentStatus.Unpaid)
+                {
+                    PaymentStatus = PaymentStatus.Paid;
+                }
+                else
+                {
+                    throw new DomainException("已經付過錢了");
+                }
+
+                break;
         }
     }
 }
