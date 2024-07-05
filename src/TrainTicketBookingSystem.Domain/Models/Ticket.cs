@@ -37,6 +37,7 @@ public class Ticket : Aggregate<Guid>
                 From = e.From;
                 To = e.To;
                 Date = e.Date;
+                PaymentStatus = PaymentStatus.Unpaid;
                 break;
             case TicketPaidDomainEvent e:
                 if (PaymentStatus == PaymentStatus.Unpaid)
