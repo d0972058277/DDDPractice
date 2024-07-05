@@ -6,12 +6,6 @@ namespace TrainTicketBookingSystem.Domain.Models;
 
 public class Ticket : Aggregate<Guid>
 {
-    private static readonly Dictionary<Type, IDomainEventHandler> EventHandlers = new()
-    {
-        { typeof(TicketBookedDomainEvent), new TicketBookedDomainEventHandler() },
-        { typeof(TicketPaidDomainEvent), new TicketPaidDomainEventHandler() }
-    };
-
     private Ticket()
     {
     }
@@ -35,11 +29,11 @@ public class Ticket : Aggregate<Guid>
         Apply(new TicketPaidDomainEvent(Id));
     }
 
-    protected override void When(DomainEvent domainEvent)
+    protected override IEnumerable<KeyValuePair<Type, IDomainEventHandler>> GetDomainEventHandlers()
     {
-        if (EventHandlers.TryGetValue(domainEvent.GetType(), out var handler))
-        {
-            handler.Handle(this, domainEvent);
-        }
+        yield return new KeyValuePair<Type, IDomainEventHandler>(typeof(TicketBookedDomainEvent),
+            new TicketBookedDomainEventHandler());
+        yield return new KeyValuePair<Type, IDomainEventHandler>(typeof(TicketPaidDomainEvent),
+            new TicketPaidDomainEventHandler());
     }
 }

@@ -15,7 +15,18 @@ public abstract class Aggregate<TId> : Entity<TId>, IAggregateRoot where TId : I
     private readonly List<DomainEvent> _domainEvents = new();
     public IReadOnlyList<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-    protected abstract void When(DomainEvent domainEvent);
+    protected abstract IEnumerable<KeyValuePair<Type, IDomainEventHandler>> GetDomainEventHandlers();
+
+    protected virtual void When(DomainEvent domainEvent)
+    {
+        var domainEventHandlers =
+            GetDomainEventHandlers().ToDictionary(e => e.Key, e => e.Value);
+
+        if (domainEventHandlers.TryGetValue(domainEvent.GetType(), out var handler))
+        {
+            handler.Handle(this, domainEvent);
+        }
+    }
 
     protected void Apply(DomainEvent domainEvent)
     {
@@ -23,7 +34,7 @@ public abstract class Aggregate<TId> : Entity<TId>, IAggregateRoot where TId : I
         AddDomainEvent(domainEvent);
     }
 
-    protected void AddDomainEvent(DomainEvent domainEvent)
+    private void AddDomainEvent(DomainEvent domainEvent)
     {
         _domainEvents.Add(domainEvent);
     }
