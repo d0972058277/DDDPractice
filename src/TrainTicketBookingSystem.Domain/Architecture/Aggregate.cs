@@ -15,12 +15,26 @@ public abstract class Aggregate<TId> : Entity<TId>, IAggregateRoot where TId : I
     }
 
     private readonly List<DomainEvent> _domainEvents = new();
-    public IReadOnlyList<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
-
+    public IReadOnlyList<DomainEvent> DomainEvents => _domainEvents.ToList().AsReadOnly();
     private readonly Dictionary<Type, IDomainEventHandler> _domainEventHandlers;
+
     protected void RegisterDomainEventHandler<TEvent>(IDomainEventHandler handler) where TEvent : DomainEvent
     {
         _domainEventHandlers[typeof(TEvent)] = handler;
+    }
+
+    public void Load(IEnumerable<DomainEvent> domainEvents)
+    {
+        foreach (var domainEvent in domainEvents)
+        {
+            When(domainEvent);
+        }
+    }
+
+    protected void Apply(DomainEvent domainEvent)
+    {
+        When(domainEvent);
+        AddDomainEvent(domainEvent);
     }
 
     private void When(DomainEvent domainEvent)
@@ -29,12 +43,6 @@ public abstract class Aggregate<TId> : Entity<TId>, IAggregateRoot where TId : I
         {
             handler.Handle(this, domainEvent);
         }
-    }
-
-    protected void Apply(DomainEvent domainEvent)
-    {
-        When(domainEvent);
-        AddDomainEvent(domainEvent);
     }
 
     private void AddDomainEvent(DomainEvent domainEvent)

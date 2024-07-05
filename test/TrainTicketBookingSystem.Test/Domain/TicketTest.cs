@@ -61,6 +61,29 @@ public class TicketTest
         action.Should().Throw<DomainException>();
     }
 
+    [Fact]
+    public void DomainEvents_載入＿應該還原()
+    {
+        // Given
+        var original = BookATicket();
+        original.Pay();
+        var domainEvents = original.DomainEvents;
+        original.ClearDomainEvents();
+
+        // When
+        var loaded = (Ticket)Activator.CreateInstance(typeof(Ticket), true)!;
+        loaded.Load(domainEvents);
+
+
+        // Then
+        loaded.Id.Should().Be(original.Id);
+        loaded.TrainId.Should().Be(original.TrainId);
+        loaded.From.Should().Be(original.From);
+        loaded.To.Should().Be(original.To);
+        loaded.Date.Should().Be(original.Date);
+        loaded.PaymentStatus.Should().Be(original.PaymentStatus);
+    }
+
     private static Ticket BookATicket()
     {
         return Ticket.Book(
