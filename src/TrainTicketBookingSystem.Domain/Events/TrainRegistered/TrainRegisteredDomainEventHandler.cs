@@ -1,7 +1,7 @@
 using TrainTicketBookingSystem.Domain.Architecture;
-using TrainTicketBookingSystem.Domain.Events;
+using TrainTicketBookingSystem.Domain.Models;
 
-namespace TrainTicketBookingSystem.Domain.Models.Handler;
+namespace TrainTicketBookingSystem.Domain.Events.TrainRegistered;
 
 public class TrainRegisteredDomainEventHandler : DomainEventHandlerBase<Train, TrainRegisteredDomainEvent>
 {

@@ -1,6 +1,8 @@
 using FluentAssertions;
 using TrainTicketBookingSystem.Domain.Architecture;
 using TrainTicketBookingSystem.Domain.Events;
+using TrainTicketBookingSystem.Domain.Events.TicketBooked;
+using TrainTicketBookingSystem.Domain.Events.TicketPaid;
 using TrainTicketBookingSystem.Domain.Models;
 
 namespace TrainTicketBookingSystem.Test.Domain;
