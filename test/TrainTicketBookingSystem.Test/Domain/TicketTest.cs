@@ -71,7 +71,7 @@ public class TicketTest
         original.ClearDomainEvents();
 
         // When
-        var loaded = (Ticket)Activator.CreateInstance(typeof(Ticket), true)!;
+        var loaded = Aggregate.Init<Ticket>();
         loaded.Load(domainEvents);
 
 

@@ -2,6 +2,14 @@ using CSharpFunctionalExtensions;
 
 namespace TrainTicketBookingSystem.Domain.Architecture;
 
+public static class Aggregate
+{
+    public static T Init<T>()
+    {
+        return (T)Activator.CreateInstance(typeof(T), true)!;
+    }
+}
+
 public abstract class Aggregate<TId> : Entity<TId>, IAggregateRoot where TId : IComparable<TId>
 {
     protected Aggregate() : base()
