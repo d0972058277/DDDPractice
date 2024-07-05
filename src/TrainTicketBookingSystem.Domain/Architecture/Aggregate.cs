@@ -17,7 +17,7 @@ public abstract class Aggregate<TId> : Entity<TId>, IAggregateRoot where TId : I
 
     protected abstract IEnumerable<KeyValuePair<Type, IDomainEventHandler>> GetDomainEventHandlers();
 
-    protected virtual void When(DomainEvent domainEvent)
+    private void When(DomainEvent domainEvent)
     {
         var domainEventHandlers =
             GetDomainEventHandlers().ToDictionary(e => e.Key, e => e.Value);
