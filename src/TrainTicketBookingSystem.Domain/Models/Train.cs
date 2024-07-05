@@ -7,6 +7,7 @@ public class Train : Aggregate<Guid>
 {
     private Train()
     {
+        _locations = new List<Location>();
     }
 
     public int Seats { get; private set; }
