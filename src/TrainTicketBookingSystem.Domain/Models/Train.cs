@@ -9,6 +9,7 @@ public class Train : Aggregate<Guid>
     private Train()
     {
         _locations = new List<Location>();
+        RegisterDomainEventHandlers();
     }
 
     internal void SetId(Guid id) => Id = id;
@@ -32,9 +33,8 @@ public class Train : Aggregate<Guid>
         Seats--;
     }
 
-    protected override IEnumerable<KeyValuePair<Type, IDomainEventHandler>> GetDomainEventHandlers()
+    private void RegisterDomainEventHandlers()
     {
-        yield return new KeyValuePair<Type, IDomainEventHandler>(typeof(TrainRegisteredDomainEvent),
-            new TrainRegisteredDomainEventHandler());
+        RegisterDomainEventHandler<TrainRegisteredDomainEvent>(new TrainRegisteredDomainEventHandler());
     }
 }

@@ -6,23 +6,26 @@ public abstract class Aggregate<TId> : Entity<TId>, IAggregateRoot where TId : I
 {
     protected Aggregate() : base()
     {
+        _domainEventHandlers = new Dictionary<Type, IDomainEventHandler>();
     }
 
     protected Aggregate(TId id) : base(id)
     {
+        _domainEventHandlers = new Dictionary<Type, IDomainEventHandler>();
     }
 
     private readonly List<DomainEvent> _domainEvents = new();
     public IReadOnlyList<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-    protected abstract IEnumerable<KeyValuePair<Type, IDomainEventHandler>> GetDomainEventHandlers();
+    private readonly Dictionary<Type, IDomainEventHandler> _domainEventHandlers;
+    protected void RegisterDomainEventHandler<TEvent>(IDomainEventHandler handler) where TEvent : DomainEvent
+    {
+        _domainEventHandlers[typeof(TEvent)] = handler;
+    }
 
     private void When(DomainEvent domainEvent)
     {
-        var domainEventHandlers =
-            GetDomainEventHandlers().ToDictionary(e => e.Key, e => e.Value);
-
-        if (domainEventHandlers.TryGetValue(domainEvent.GetType(), out var handler))
+        if (_domainEventHandlers.TryGetValue(domainEvent.GetType(), out var handler))
         {
             handler.Handle(this, domainEvent);
         }

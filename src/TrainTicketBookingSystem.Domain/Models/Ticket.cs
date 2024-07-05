@@ -8,6 +8,7 @@ public class Ticket : Aggregate<Guid>
 {
     private Ticket()
     {
+        RegisterDomainEventHandlers();
     }
 
     internal void SetId(Guid id) => Id = id;
@@ -29,11 +30,9 @@ public class Ticket : Aggregate<Guid>
         Apply(new TicketPaidDomainEvent(Id));
     }
 
-    protected override IEnumerable<KeyValuePair<Type, IDomainEventHandler>> GetDomainEventHandlers()
+    private void RegisterDomainEventHandlers()
     {
-        yield return new KeyValuePair<Type, IDomainEventHandler>(typeof(TicketBookedDomainEvent),
-            new TicketBookedDomainEventHandler());
-        yield return new KeyValuePair<Type, IDomainEventHandler>(typeof(TicketPaidDomainEvent),
-            new TicketPaidDomainEventHandler());
+        RegisterDomainEventHandler<TicketBookedDomainEvent>(new TicketBookedDomainEventHandler());
+        RegisterDomainEventHandler<TicketPaidDomainEvent>(new TicketPaidDomainEventHandler());
     }
 }
