@@ -7,32 +7,32 @@ namespace TrainTicketBookingSystem.WebApi.Controllers.TicketEndpoint;
 [Route("api/[controller]")]
 public class TicketController : ControllerBase
 {
-    private readonly TrainTicketBookingSystemDbContext _trainTicketBookingSystemDbContext;
+    private readonly ITicketRepository _ticketRepository;
+    private readonly ITrainRepository _trainRepository;
 
-    public TicketController(TrainTicketBookingSystemDbContext trainTicketBookingSystemDbContext)
+    public TicketController(ITicketRepository ticketRepository, ITrainRepository trainRepository)
     {
-        _trainTicketBookingSystemDbContext = trainTicketBookingSystemDbContext;
+        _ticketRepository = ticketRepository;
+        _trainRepository = trainRepository;
     }
 
     [HttpPost]
     public async Task<ActionResult<Guid>> Book([FromBody] BookTicketRequest request)
     {
-        var train = await _trainTicketBookingSystemDbContext.Trains.FindAsync(request.TrainId);
+        var train = await _trainRepository.FindAsync(request.TrainId);
         var ticket = BookTrainTicketService.Execute(train!, Guid.NewGuid(), Location.Create(request.From),
             Location.Create(request.To), Date.Create(request.Date));
-        _trainTicketBookingSystemDbContext.Tickets.Add(ticket);
-        _trainTicketBookingSystemDbContext.Trains.Update(train!);
-        await _trainTicketBookingSystemDbContext.SaveChangesAsync();
+        await _ticketRepository.AddAsync(ticket);
+        await _trainRepository.UpdateAsync(train!);
         return Ok(new BookTicketResponse { Id = ticket.Id });
     }
 
     [HttpPost("{id:guid}/Pay")]
     public async Task<ActionResult> Pay([FromRoute] Guid id)
     {
-        var ticket = await _trainTicketBookingSystemDbContext.Tickets.FindAsync(id);
+        var ticket = await _ticketRepository.FindAsync(id);
         ticket!.Pay();
-        _trainTicketBookingSystemDbContext.Tickets.Update(ticket);
-        await _trainTicketBookingSystemDbContext.SaveChangesAsync();
+        await _ticketRepository.UpdateAsync(ticket);
         return Ok();
     }
 }

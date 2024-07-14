@@ -7,11 +7,11 @@ namespace TrainTicketBookingSystem.WebApi.Controllers.TrainEndpoint;
 [Route("api/[controller]")]
 public class TrainController : ControllerBase
 {
-    private readonly TrainTicketBookingSystemDbContext _trainTicketBookingSystemDbContext;
+    private readonly ITrainRepository _trainRepository;
 
-    public TrainController(TrainTicketBookingSystemDbContext trainTicketBookingSystemDbContext)
+    public TrainController(ITrainRepository trainRepository)
     {
-        _trainTicketBookingSystemDbContext = trainTicketBookingSystemDbContext;
+        _trainRepository = trainRepository;
     }
 
     [HttpPost]
@@ -20,8 +20,7 @@ public class TrainController : ControllerBase
         var train = Train.Register(Guid.NewGuid(), request.Seats,
             request.Locations.Select(Location.Create),
             Date.Create(request.Date));
-        _trainTicketBookingSystemDbContext.Trains.Add(train);
-        await _trainTicketBookingSystemDbContext.SaveChangesAsync();
+        await _trainRepository.AddAsync(train);
         return Ok(new RegisterTrainResponse { Id = train.Id });
     }
 }
